@@ -1,4 +1,4 @@
-package com.whilchy.weatherapp.adapters
+package com.whilchy.weatherapp.ui.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
