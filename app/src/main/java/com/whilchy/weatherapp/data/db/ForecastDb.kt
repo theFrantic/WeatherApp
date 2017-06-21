@@ -1,12 +1,13 @@
 package com.whilchy.weatherapp.data.db
 
+import com.whilchy.weatherapp.domain.datasource.ForecastDataSource
 import com.whilchy.weatherapp.domain.model.ForecastList
 import com.whilchy.weatherapp.extensions.clear
 import com.whilchy.weatherapp.extensions.parseList
 import com.whilchy.weatherapp.extensions.parseOpt
 import com.whilchy.weatherapp.extensions.toVarargArray
-import org.jetbrains.anko.db.select
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 
 
 /**
@@ -14,9 +15,9 @@ import org.jetbrains.anko.db.insert
  */
 
 class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
-        val dataMapper: DbDataMapper = DbDataMapper()) {
+                 val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
 
-    fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
