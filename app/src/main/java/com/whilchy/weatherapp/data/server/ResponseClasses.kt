@@ -1,4 +1,4 @@
-package com.whilchy.weatherapp.data
+package com.whilchy.weatherapp.data.server
 
 /**
  * Created by daniel on 11/06/17.

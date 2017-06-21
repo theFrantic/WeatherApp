@@ -1,7 +1,7 @@
 package com.whilchy.weatherapp.ui
 
 import android.app.Application
-import com.whilchy.weatherapp.ui.utils.DelegatesExt
+import com.whilchy.weatherapp.extensions.DelegatesExt
 
 /**
  * Created by daniel on 11/06/17.

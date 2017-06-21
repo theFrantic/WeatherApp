@@ -1,4 +1,4 @@
-package com.whilchy.weatherapp.ui.utils
+package com.whilchy.weatherapp.extensions
 
 import android.content.Context
 import android.view.View
