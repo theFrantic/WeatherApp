@@ -12,10 +12,11 @@ import com.whilchy.weatherapp.extensions.color
 import com.whilchy.weatherapp.extensions.textColor
 import com.whilchy.weatherapp.extensions.toDateString
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.ctx
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
-import org.jetbrains.anko.uiThread
 import java.text.DateFormat
 
 class DetailActivity : AppCompatActivity(), ToolbarManager {
@@ -35,9 +36,9 @@ class DetailActivity : AppCompatActivity(), ToolbarManager {
         toolbarTitle = intent.getStringExtra(CITY_NAME)
         enableHomeAsUp { onBackPressed() }
 
-        doAsync {
-            val result = RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute()
-            uiThread { bindForecast(result) }
+        async(UI) {
+            val result = bg { RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute() }
+            bindForecast(result.await())
         }
     }
 
