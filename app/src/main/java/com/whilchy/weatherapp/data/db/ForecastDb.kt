@@ -2,10 +2,7 @@ package com.whilchy.weatherapp.data.db
 
 import com.whilchy.weatherapp.domain.datasource.ForecastDataSource
 import com.whilchy.weatherapp.domain.model.ForecastList
-import com.whilchy.weatherapp.extensions.clear
-import com.whilchy.weatherapp.extensions.parseList
-import com.whilchy.weatherapp.extensions.parseOpt
-import com.whilchy.weatherapp.extensions.toVarargArray
+import com.whilchy.weatherapp.extensions.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import java.util.HashMap
@@ -30,6 +27,13 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }
 
         if (city != null) dataMapper.convertToDomain(city) else null
+    }
+
+    override fun requestDayForecast(id: Long) = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME).byId(id).
+                parseOpt { DayForecast(HashMap(it)) }
+
+        if (forecast != null) dataMapper.convertDayToDomain(forecast) else null
     }
 
     fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {

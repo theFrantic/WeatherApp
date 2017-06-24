@@ -9,6 +9,7 @@ import com.whilchy.weatherapp.R
 import com.whilchy.weatherapp.domain.model.Forecast
 import com.whilchy.weatherapp.domain.model.ForecastList
 import com.whilchy.weatherapp.extensions.ctx
+import com.whilchy.weatherapp.extensions.toDateString
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import java.text.DateFormat
 import java.util.*
@@ -36,17 +37,12 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = convertDate(date)
+                date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "${high}º"
                 itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
-        }
-
-        private fun convertDate(date: Long): String {
-            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-            return df.format(date)
         }
     }
 }
