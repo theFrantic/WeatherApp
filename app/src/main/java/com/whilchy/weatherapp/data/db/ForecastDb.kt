@@ -8,6 +8,7 @@ import com.whilchy.weatherapp.extensions.parseOpt
 import com.whilchy.weatherapp.extensions.toVarargArray
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
+import java.util.HashMap
 
 
 /**

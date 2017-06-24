@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand(94043).execute()
             uiThread {
-                val adapter = ForecastListAdapter(result) { toast(it.description) }
+                val adapter = ForecastListAdapter(result, { toast(it.description) })
                 forecastList.adapter = adapter
             }
         }
